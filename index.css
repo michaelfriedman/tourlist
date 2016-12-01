@@ -18,6 +18,10 @@ body {
   bottom: 0;
 }
 
-#venue-link {
-  display: block;
+.input-field .prefix.active {
+  color: #e91e63;
+}
+
+.input-field input[type=text]:focus + label {
+  color: #e91e63;
 }

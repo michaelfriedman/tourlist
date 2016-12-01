@@ -1,7 +1,12 @@
 (function() {
   'use strict';
-  $('button').click(() => {
-    $('.results').empty()
+
+  $('#search').on('focus', () => {
+    $('input[type=text], textarea').val('');
+  });
+
+  $('.search-button').click(() => {
+    $('.results').empty();
     const getArtists = () => {
       const input = $('input').val();
 
@@ -12,7 +17,7 @@
         success: (state) => {
           const h3 = $('<h3>').text(state.name);
           const resultsDiv = $('.results');
-          const img = $('<img>').prop('src', state.thumb_url);
+          const img = $('<img>').prop('src', state.thumb_url).css('class', 'responsive-img');
           const fbTour = $('<a>').prop('href', state.facebook_tour_dates_url);
           const howManyEvents = $('<p>').text(`${state.name} has
             ${state.upcoming_event_count} upcoming events`);
