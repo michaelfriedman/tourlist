@@ -1,43 +1,47 @@
-(function () {
+(function() {
   'use strict';
-$('button').click(() => {
-  // $('.text').text('loading . . .');
-  const getArtists = () => {
-    const input = $('input').val()
-    $('input[type=text], textarea').val('');
-    $.ajax({
-      type:"GET",
-      url: `http://api.bandsintown.com/artists/${input}.json?api_version=2.0&app_id=michaelfriedman`,
-      success: (state) => {
-        const h3 = $('<h3>').text(state.name);
-        const resultsDiv = $('.results');
-        const img = $('<img>').prop('src', state.thumb_url);
-        const fbTour = $('<a>').prop('href', state.facebook_tour_dates_url);
-        const howManyEvents = $('<p>').text(`${state.name} has ${state.upcoming_event_count} upcoming events`);
-        const fbPage = $('<a>').prop('href', state.facebook_page_url);
-        fbTour.text('Facebook Tour Page');
-        fbPage.text('Facebook Page');
-        resultsDiv
-        .append(h3)
-        .append(img)
-        .append(fbTour)
-        .append(howManyEvents)
-        .append(fbPage)
-        console.log(state)
-      },
-      dataType: 'jsonp'
-    });
-    getEvents(input)
-  }
-  getArtists()
-});
+  $('button').click(() => {
+    $('.results').empty()
+    const getArtists = () => {
+      const input = $('input').val();
+
+      $('input[type=text], textarea').val('');
+      $.ajax({
+        type: 'GET',
+        url: `http://api.bandsintown.com/artists/${input}.json?api_version=2.0&app_id=michaelfriedman`,
+        success: (state) => {
+          const h3 = $('<h3>').text(state.name);
+          const resultsDiv = $('.results');
+          const img = $('<img>').prop('src', state.thumb_url);
+          const fbTour = $('<a>').prop('href', state.facebook_tour_dates_url);
+          const howManyEvents = $('<p>').text(`${state.name} has
+            ${state.upcoming_event_count} upcoming events`);
+          const fbPage = $('<a>').prop('href', state.facebook_page_url);
+
+          fbTour.text('Facebook Tour Page');
+          fbPage.text('Facebook Page');
+          resultsDiv
+          .append(h3)
+          .append(img)
+          .append(fbTour)
+          .append(howManyEvents)
+          .append(fbPage)
+          console.log(state);
+        },
+        dataType: 'jsonp'
+      });
+      getEvents(input);
+    };
+    getArtists();
+  });
   const getEvents = (input) => {
     $.ajax({
-      type:"GET",
+      type: 'GET',
       url: `http://api.bandsintown.com/artists/${input}/events.json?api_version=2.0&app_id=michaelfriedman`,
       success: (state) => {
         const events = state;
         const resultsDiv = $('.results');
+
         for (const event of events) {
           const showName = event.title;
           const eventDateTime = event.formatted_datetime;
@@ -50,6 +54,7 @@ $('button').click(() => {
           const h5 = $('<h5>');
           const h4 = $('<h4>');
           const ticketLink = $('<a>');
+
           ticketLink.prop('href', ticketURL);
           venueLink.prop('href', `http://maps.google.com/maps?q=${eventLat},${eventLong}`).css('display', 'block');
           venueLink.id = 'venue-link';
@@ -57,15 +62,16 @@ $('button').click(() => {
           ticketLink.text(ticketStatus);
           h4.text(showName);
           h5.text(eventDateTime);
-          resultsDiv.append(h4)
-          resultsDiv.append(h5)
-          resultsDiv.append(ticketLink)
-          resultsDiv.append(venueLink);
-          console.log(showName)
-          console.log(event)
+          resultsDiv
+          .append(h4)
+          .append(h5)
+          .append(ticketLink)
+          .append(venueLink)
+          console.log(showName);
+          console.log(event);
         }
       },
       dataType: 'jsonp'
     });
-  }
+  };
 })();
