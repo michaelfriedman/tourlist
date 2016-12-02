@@ -17,11 +17,3 @@ body {
   position: relative;
   bottom: 0;
 }
-
-.input-field .prefix.active {
-  color: #e91e63;
-}
-
-.input-field input[type=text]:focus + label {
-  color: #e91e63;
-}
