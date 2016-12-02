@@ -3,25 +3,75 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Q1 Projectzzz</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Q1 Project</title>
     <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <script defer src="https://use.fontawesome.com/4f5c75f902.js"></script>
     <script defer src="index.js" charset="utf-8"></script>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <div class="navbar-fixed">
-      
+      <nav>
+        <div class="nav-wrapper blue-grey">
+          <a class ="brand-logo" href="#">bandsintown</a>
+          <a class="button-collapse" href="#" data-activates="menu"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="#">Lorem Ipsum</a></li>
+          </ul>
+          <ul class="side-nav" id="menu">
+            <li><a href="#"></a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
 
-    <div class="container">
-      <div class="search_container">
-        <input id="search" type="text" value="Enter Your Search Here">
-        <button>SEARCH</button>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m12 l12">
+            <div class="search_container">
+              <div class="input-field col s12">
+                <input id="search" type="text" value="Enter Your Search Here">
+                <a class="waves-effect waves-light btn search-button"><i class="material-icons left">search</i>SEARCH</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m12 l12">
+            <div class="results">
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="results">
+    </main>
+    <footer class="page-footer fixed blue-grey">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m6">
+            <h5 class="white-text">bandsintown</h5>
+            <p class="grey-text text-lighten-4">Tag Line Here</p>
+          </div>
+          <div class="col s12 m4 offset-m2">
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#">Lorem Ipsum</a></li>
+              <li><a class="grey-text text-lighten-3" href="#">More Lorem Ipsum</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
+      <div class="footer-copyright blue-grey lighten-1">
+        <div class="container">
+          <div class="row">
+            <div class="s12">
+              © 2016 Lorem Ipsum Inc.
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

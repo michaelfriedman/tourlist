@@ -1,3 +1,19 @@
-#venue-link {
-  display: block;
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+    margin: 30px;
+  }
+
+.brand-logo, .button-collapse {
+  margin-left: 20px;
+}
+
+.page-footer {
+  position: relative;
+  bottom: 0;
 }
