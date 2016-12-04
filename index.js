@@ -1,11 +1,25 @@
 (function() {
   'use strict';
 
-  const clearSearch = () => {
+  const clearSearch = function() {
     $('input[type=text], textarea').val('');
   };
 
-  const getEvents = (input) => {
+  const createEventCard = function(events) {
+    console.log(events)
+
+    const collectionDiv = $('<ul>').prop('class', 'collection with-header');
+    const liHeader = $('<li>').prop('class', 'collection-header');
+    // liHeader.append('<h4>').text(events.title);
+    for (event of events) {
+      liHeader.append('<h4>').text(event.title);
+    }
+      collectionDiv.append(liHeader)
+    $('.results').append(collectionDiv);
+
+  };
+
+  const getEvents = function(input) {
     $.ajax({
       type: 'GET',
       url: `http://api.bandsintown.com/artists/${input}/events.json?api_version=2.0&app_id=michaelfriedman`,
@@ -27,20 +41,20 @@
           const ticketLink = $('<a>').prop('href', ticketURL)
             .css('id', 'venue-link')
             .text(ticketStatus);
-
+          createEventCard(events)
           resultsDiv
           .append(showName)
           .append(eventDateTime)
           .append(ticketLink)
           .append(venueLink)
-          console.log(event);
+          // console.log(event);
         }
       },
       dataType: 'jsonp'
     });
   };
 
-  const getArtists = (input) => {
+  const getArtists = function(input) {
     $.ajax({
       type: 'GET',
       url: `http://api.bandsintown.com/artists/${input}.json?api_version=2.0&app_id=michaelfriedman`,
