@@ -7,26 +7,6 @@
     $('input[type=text], textarea').val('');
   };
 
-  // const createEventCard = function(events) {
-  //   // console.log(events)
-  //
-  //   const collectionDiv = $('<ul>').prop('class', 'collection with-header');
-  //   const liHeader = $('<li>').prop('class', 'collection-header');
-  //   const showTitle = $('<h4>')
-  //   liHeader.append(showTitle)
-  //   showTitle.text(event.title)
-  //   collectionDiv.append(liHeader)
-  // $('.results').append(collectionDiv);
-  //
-  //   for (const event of events) {
-  //     showTitle.text(event.title)
-  //     console.log(event.title)
-  //   }
-  //     collectionDiv.append(liHeader)
-  //   $('.results').append(collectionDiv);
-  //
-  // };
-
   const getEvents = function(input) {
     $.ajax({
       type: 'GET',
@@ -36,48 +16,46 @@
         const resultsDiv = $('.results');
 
         for (const show of shows) {
-          const showName = $('<h4>').text(show.title);
           const showDateTime = $('<h5>').text(show.formatted_datetime);
           const ticketStatus = `Tickets are ${show.ticket_status}.`;
           const ticketURL = show.ticket_url;
           const showLong = show.venue.longitude;
           const showLat = show.venue.latitude;
-          const venueLink = $('<a>').prop('href',
+          const venueLink = $('<a>')
+            .prop('href',
             `http://maps.google.com/maps?q=${showLat},${showLong}`)
-            .css('display', 'block').text('Get Directions to the Venue');
+            .prop('display', 'block')
+            .text('Get Directions to the Venue');
           // const eventID = event.id;
           const ticketLink = $('<a>').prop('href', ticketURL)
             .css('id', 'venue-link')
             .text(ticketStatus);
-          // createEventCard(events)
-          const collectionDiv = $('<ul>').prop('class', 'collection with-header');
+          const collectionDiv = $('<ul>')
+            .prop('class', 'collection with-header');
           const liHeader = $('<li>').prop('class', 'collection-header');
           const showTitle = $('<h4>');
-          const eventDateContainer = $('<li>').prop('class', 'collection-item');
+          const showDateContainer = $('<li>').prop('class', 'collection-item');
+          const showDirectionsContainer = $('<a>')
+            .prop('class', 'collection-item')
+            .prop('href', `http://maps.google.com/maps?q=${showLat},${showLong}`)
+            .text('Directions to Venue');
           let ticketsAvailableContainer;
+
           show.ticket_url === null
-          ?
-            ticketsAvailableContainer = $('<li>').prop('href',
+          ? ticketsAvailableContainer = $('<li>').prop('href',
               show.ticket_url).prop('class',
               'collection-item').text(ticketStatus)
-          :
-            ticketsAvailableContainer = $('<a>').prop('href',
+          : ticketsAvailableContainer = $('<a>').prop('href',
               show.ticket_url).prop('class',
-              'collection-item').text(ticketStatus);
-
+              'collection-item').text('Buy Tickets');
           liHeader.append(showTitle);
-          eventDateContainer.text(show.formatted_datetime);
+          showDateContainer.text(show.formatted_datetime);
           showTitle.text(show.title);
           collectionDiv.append(liHeader)
-          .append(eventDateContainer)
-          .append(ticketsAvailableContainer);
-        $('.results').append(collectionDiv);
-
-          resultsDiv
-          // .append(showName)
-          // .append(eventDateTime)
-          .append(ticketLink)
-          .append(venueLink)
+          .append(showDateContainer)
+          .append(ticketsAvailableContainer)
+          .append(showDirectionsContainer);
+          $('.results').append(collectionDiv);
           // console.log(event);
         }
       },
@@ -90,7 +68,7 @@
       type: 'GET',
       url: `http://api.bandsintown.com/artists/${input}.json?api_version=2.0&app_id=michaelfriedman`,
       success: (state) => {
-        if (state.name === undefined) {
+        if (!state.name) {
           Materialize.toast('Sorry, no match found.', 4000);
         }
         else {
