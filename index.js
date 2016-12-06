@@ -1,35 +1,44 @@
 (function() {
   'use strict';
-
-  $('.button-collapse').sideNav();
+  $('.button-collapse').sideNav({
+    menuWidth: 300, // Default is 240
+    edge: 'right', // Choose the horizontal origin
+    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    draggable: true // Choose whether you can drag to open on touch screens
+  }
+  );
   $('select').material_select();
 
   const clearSearch = function() {
-    $('input[type=text], textarea').val('');
+    $('#search-input[type=text], textarea').val('');
   };
 
   const renderEvents = function(state) {
     const shows = state;
+
     for (const show of shows) {
-      const ticketStatus = `Tickets are ${show.ticket_status}.`;
       const collectionDiv = $('<ul>')
         .prop('class', 'collection with-header');
       const liHeader = $('<li>').prop('class', 'collection-header');
       const showTitle = $('<h4>');
       const showDateContainer = $('<li>').prop('class', 'collection-item');
       const showDirectionsContainer = $('<a>')
-        .prop('class', 'collection-item')
-        .prop('href', `http://maps.google.com/maps?q=${show.venue.latitude},${show.venue.longitude}`)
-        .text('Directions to Venue');
+        .prop({ class: 'collection-item', href: `http://maps.google.com/maps?q=${show.venue.latitude},${show.venue.longitude}`, text: 'Directions to Venue' });
       let ticketsAvailableContainer;
 
       show.ticket_url === null
-      ? ticketsAvailableContainer = $('<li>').prop('href',
-          show.ticket_url).prop('class',
-          'collection-item').text(ticketStatus)
-      : ticketsAvailableContainer = $('<a>').prop('href',
-          show.ticket_url).prop('class',
-          'collection-item').text('Buy Tickets');
+      ? ticketsAvailableContainer = $('<li>')
+        .prop({
+          // href: show.ticket_url,
+          class: 'collection-item',
+          // text: `Tickets are ${show.ticket_status}.`
+        }).text(`Tickets are ${show.ticket_status}.`)
+      : ticketsAvailableContainer = $('<a>')
+        .prop({
+          href: show.ticket_url,
+          class: 'collection-item',
+          text: 'Buy Tickets'
+        });
       liHeader.append(showTitle);
       showDateContainer.text(show.formatted_datetime);
       showTitle.text(show.title);
@@ -53,10 +62,9 @@
   };
 
   const createProfile = function(state) {
-    console.log(state);
     const fbPage = $('<a>').prop('href', state.facebook_page_url);
     const fbTour = $('<a>').prop('href',
-        state.facebook_tour_dates_url).text('Facebook Tour Page');
+        state.facebook_tour_dates_url).text('Tour Page');
     const rowDiv = $('<div>').prop('class', 'row');
     const colDiv = $('<div>').prop('class', 'col s12 m6 l6');
     const cardDiv = $('<div>').prop('class', 'card');
@@ -98,36 +106,157 @@
     getEvents(input);
   };
 
-  $('#search').on('focus', () => {
+  $('#search-input').on('focus', () => {
     clearSearch();
   });
 
-  $('#search').keyup((event) => {
+  const advancedSearch = function(input) {
+    // const input = $('#search-input').val();
+    const city = $('#city').val();
+    const region = $('#state').val();
+    const radius = $('#radius').val();
+
+    if (input.trim() === '' || input.trim() === 'Artist or Group Name') {
+      Materialize.toast('Please Enter an Artist or Group', 4000);
+
+      return;
+    }
+    if (city.trim() === '') {
+      Materialize.toast('Please Enter Your City', 4000);
+
+      return;
+    }
+    if (region === null) {
+      Materialize.toast('Please Select Your State', 4000);
+
+      return;
+    }
+    if (radius === null) {
+      Materialize.toast('Please Select How Far You Will Travel', 4000);
+
+      return;
+    }
+    $('.results').empty();
+    clearSearch();
+    $.ajax({
+      type: 'GET',
+      url: `http://api.bandsintown.com/artists/${input}.json?api_version=2.0&app_id=michaelfriedman`,
+      success: (state) => {
+        if (!state.name) {
+          Materialize.toast('Sorry, no match found.', 4000);
+        }
+        else {
+          createProfile(state);
+        }
+      },
+      dataType: 'jsonp'
+    });
+    $.ajax({
+      type: 'GET',
+      url: `http://api.bandsintown.com/artists/${input}/events/search.json?api_version=2.0&app_id=michaelfriedman&location=${city},${region}&radius=${radius}`,
+      success: (state) => {
+        renderEvents(state);
+      },
+      dataType: 'jsonp'
+    });
+  };
+
+  $('#search-input').keyup((event) => {
     const code = event.which;
-    const input = $('input').val();
+    const input = $('#search-input').val();
 
     if (code === 13) {
-      clearSearch();
-      if (input.trim() === '' || input.trim() === 'Enter Your Search Here') {
-        Materialize.toast('Please Enter an Artist or Group', 4000);
-
-        return;
+      if ($('input:checkbox').is(':checked')) {
+        advancedSearch(input);
       }
-      $('.results').empty();
-      getArtists(input);
+      else {
+        $('.results').empty();
+        getArtists(input);
+      }
     }
   });
 
   $('.search-button').click(() => {
-    const input = $('input').val();
-
-    clearSearch();
+    const input = $('#search-input').val();
     if (input.trim() === '' || input.trim() === 'Enter Your Search Here') {
       Materialize.toast('Please Enter an Artist or Group', 4000);
 
       return;
     }
     $('.results').empty();
+    clearSearch();
     getArtists(input);
   });
+
+  $('#advanced-button').click(() => {
+    const input = $('#search-input').val();
+    advancedSearch(input);
+  });
+
+  $('input:checkbox').change(function() {
+    if ($(this).is(':checked')) {
+      $('#advanced').removeClass('hide');
+      $('#advanced-button').removeClass('hide');
+      $('#search-button').hide();
+    }
+    else {
+      $('#search-button').show();
+      $('#advanced').addClass('hide');
+      $('#advanced-button').addClass('hide');
+    }
+  });
 })();
+
+var substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    var matches, substringRegex;
+
+    // an array that will be populated with substring matches
+    matches = [];
+
+    // regex used to determine if a string contains the substring `q`
+    substrRegex = new RegExp(q, 'i');
+
+    // iterate through the pool of strings and for any string that
+    // contains the substring `q`, add it to the `matches` array
+    $.each(strs, function(i, str) {
+      if (substrRegex.test(str)) {
+        matches.push(str);
+      }
+    });
+
+    cb(matches);
+  };
+};
+
+var artists = ['the string cheese incident', 'phish', 'sts9', 'beats antique', 'kid rock',
+  'guns n roses', 'red hot chili peppers', 'dave matthews band', 'u2', 'Georgia', 'Hawaii',
+  'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+  'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+  'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+  'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+  'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+];
+
+var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+  'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+  'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+  'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+  'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+  'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+  'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+];
+
+$('#the-basics .typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'artists',
+  source: substringMatcher(artists)
+});
