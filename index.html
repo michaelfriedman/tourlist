@@ -1,168 +1,203 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Q1 Project</title>
-    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-    <script defer src="https://use.fontawesome.com/4f5c75f902.js"></script>
-    <script defer src="index.js" charset="utf-8"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <link rel="stylesheet" href="index.css">
-  </head>
-  <body>
-    <div class="navbar-fixed">
-      <nav>
-        <div class="nav-wrapper blue-grey">
-          <a class ="brand-logo center" href="#">bandsintown</a>
-          <a class="button-collapse" href="#" data-activates="menu"><i class="material-icons">menu</i></a>
-          <ul class="right hide-on-med-and-down">
-            <li><a href="#">Lorem Ipsum</a></li>
-          </ul>
-          <ul class="side-nav" id="menu">
-            <li><a href="#"></a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
 
-    <main>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q1 Project</title>
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <script defer src="https://use.fontawesome.com/4f5c75f902.js"></script>
+  <script defer src="typeahead.js"></script>
+  <script defer src="index.js" charset="utf-8"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div class="navbar-fixed">
+    <nav id="nav-fixed" class="default_color dodgerblue" role="navigation">
       <div class="container">
-        <div class="row">
-          <div class="col s12 m12 l12">
-            <div class="search_container">
-              <div class="switch left">
-               <label>
+        <div class="nav-wrapper">
+          <a href="#" id="logo-container" class="brand-logo center">Tour List</a>
+          <ul class="right hide-on-med-and-down">
+            <!-- nav stuff here -->
+          </ul>
+          <ul id="nav-mobile" class="side-nav">
+            <!-- nav stuff here -->
+          </ul>
+          <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!--Hero-->
+  <main>
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <div class="switch left">
+          <label>
                  Off
                  <input type="checkbox">
-                 <span class="lever"></span>
+                 <span id="blue-switch" class="lever"></span>
                  Advanced Search
                </label>
-             </div>
-              <div class="col s12">
-                <div class="input-field col s6">
-                  <input id="search-input" type="text" value="Artist or Group Name">
-                  <a id="search-button" class="waves-effect waves-light btn search-button"><i class="material-icons left">search</i>SEARCH</a>
-                 <a id="advanced-button" class="waves-effect waves-light hide btn">button</a>
+        </div>
+      </div>
 
-                <div id="advanced" class="hide">
-                  <div class="input-field col s6">
-                    <i class="material-icons prefix">location_city</i>
-                    <input id="city" type="text" class="validate">
-                    <label for="icon_prefix">City</label>
-                  </div>
-                  <div class="input-field col s6">
-                    <i class="material-icons prefix">location_on</i>
-                    <select id="state">
-                      <option value="" disabled selected>Select</option>
-                      <option value="Alabama">Alabama</option>
-                      <option value="Alaska">Alaska</option>
-                      <option value="Arizona">Arizona</option>
-                      <option value="Arkansas">Arkansas</option>
-                      <option value="California">California</option>
-                      <option value="Colorado">Colorado</option>
-                      <option value="Connecticut">Connecticut</option>
-                      <option value="Delaware">Delaware</option>
-                      <option value="Florida">Florida</option>
-                      <option value="Georgia">Georgia</option>
-                      <option value="Hawaii">Hawaii</option>
-                      <option value="Idaho">Idaho</option>
-                      <option value="Illiniois">Illiniois</option>
-                      <option value="Indiana">Indiana</option>
-                      <option value="Iowa">Iowa</option>
-                      <option value="Kansas">Kansas</option>
-                      <option value="Kentucky">Kentucky</option>
-                      <option value="Louisiana">Louisiana</option>
-                      <option value="Maine">Maine</option>
-                      <option value="Maryland">Maryland</option>
-                      <option value="Massachusetts">Massachusetts</option>
-                      <option value="Michigin">Michigin</option>
-                      <option value="Minnesota">Minnesota</option>
-                      <option value="Mississippi">Mississippi</option>
-                      <option value="Missouri">Missouri</option>
-                      <option value="Montana">Montana</option>
-                      <option value="Nebraska">Nebraska</option>
-                      <option value="Nevada">Nevada</option>
-                      <option value="New Hampshire">New Hampshire</option>
-                      <option value="New Jersey">New Jersey</option>
-                      <option value="New Mexico">New Mexico</option>
-                      <option value="New York">New York</option>
-                      <option value="North Carolina">North Carolina</option>
-                      <option value="North Dakota">North Dakota</option>
-                      <option value="Ohio">Ohio</option>
-                      <option value="Oklahoma">Oklahoma</option>
-                      <option value="Oregon">Oregon</option>
-                      <option value="Pennsylvania">Pennsylvania</option>
-                      <option value="Rhode Island">Rhode Island</option>
-                      <option value="South Corolina">South Corolina</option>
-                      <option value="South Dakota">South Dakota</option>
-                      <option value="Tennessee">Tennessee</option>
-                      <option value="Texas">Texas</option>
-                      <option value="Utah">Utah</option>
-                      <option value="Vermont">Vermont</option>
-                      <option value="Virginia">Virginia</option>
-                      <option value="Washington">Washington</option>
-                      <option value="West Virginia">West Virginia</option>
-                      <option value="Wisconsin">Wisconsin</option>
-                      <option value="Wyoming">Wyoming</option>
-                    </select>
-                    <label>State</label>
-                  </div>
-                  <div class="input-field col s6">
-                    <select id="radius">
-                      <option value="" disabled selected>Select</option>
-                      <option value="5">5 miles</option>
-                      <option value="10">10 miles</option>
-                      <option value="15">15 miles</option>
-                      <option value="25">25 miles</option>
-                      <option value="50">50 miles</option>
-                      <option value="75">75 miles</option>
-                      <option value="100">100 miles</option>
-                      <option value="250">250 miles</option>
-                    </select>
-                    <label>Max Distance</label>
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-        </div>
+      <div class="container">
+
+        <!-- <div id="the-basics">
+          <input class="typeahead" type="text" placeholder="States of USA">
+        </div> -->
+
+
+
         <div class="row">
-          <div class="col s12 m12 l12">
-            <div class="results">
+          <div class="col s12">
+            <div id="the-basics" class="input-field">
+              <i class="material-icons prefix">search</i>
+              <input id="search-input" class="typeahead validate" type="text" value="Artist or Group Name">
+              <label for="icon_prefix">Search</label>
+              <a id="search-button" class="waves-effect waves-light btn search-button dodgerblue"><i class="material-icons left">search</i>SEARCH</a>
+              <a id="advanced-button" class="waves-effect waves-light hide btn dodgerblue">Advanced Search</a>
+            </div>
+            <div id="advanced" class="hide">
+              <div class="input-field">
+                <i class="material-icons prefix">location_city</i>
+                <input id="city" type="text" class="validate">
+                <label for="icon_prefix">City</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">location_on</i>
+                <select id="state">
+                            <option value="" disabled selected>Select</option>
+                            <option value="Alabama">Alabama</option>
+                            <option value="Alaska">Alaska</option>
+                            <option value="Arizona">Arizona</option>
+                            <option value="Arkansas">Arkansas</option>
+                            <option value="California">California</option>
+                            <option value="Colorado">Colorado</option>
+                            <option value="Connecticut">Connecticut</option>
+                            <option value="Delaware">Delaware</option>
+                            <option value="Florida">Florida</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Hawaii">Hawaii</option>
+                            <option value="Idaho">Idaho</option>
+                            <option value="Illiniois">Illiniois</option>
+                            <option value="Indiana">Indiana</option>
+                            <option value="Iowa">Iowa</option>
+                            <option value="Kansas">Kansas</option>
+                            <option value="Kentucky">Kentucky</option>
+                            <option value="Louisiana">Louisiana</option>
+                            <option value="Maine">Maine</option>
+                            <option value="Maryland">Maryland</option>
+                            <option value="Massachusetts">Massachusetts</option>
+                            <option value="Michigin">Michigin</option>
+                            <option value="Minnesota">Minnesota</option>
+                            <option value="Mississippi">Mississippi</option>
+                            <option value="Missouri">Missouri</option>
+                            <option value="Montana">Montana</option>
+                            <option value="Nebraska">Nebraska</option>
+                            <option value="Nevada">Nevada</option>
+                            <option value="New Hampshire">New Hampshire</option>
+                            <option value="New Jersey">New Jersey</option>
+                            <option value="New Mexico">New Mexico</option>
+                            <option value="New York">New York</option>
+                            <option value="North Carolina">North Carolina</option>
+                            <option value="North Dakota">North Dakota</option>
+                            <option value="Ohio">Ohio</option>
+                            <option value="Oklahoma">Oklahoma</option>
+                            <option value="Oregon">Oregon</option>
+                            <option value="Pennsylvania">Pennsylvania</option>
+                            <option value="Rhode Island">Rhode Island</option>
+                            <option value="South Corolina">South Corolina</option>
+                            <option value="South Dakota">South Dakota</option>
+                            <option value="Tennessee">Tennessee</option>
+                            <option value="Texas">Texas</option>
+                            <option value="Utah">Utah</option>
+                            <option value="Vermont">Vermont</option>
+                            <option value="Virginia">Virginia</option>
+                            <option value="Washington">Washington</option>
+                            <option value="West Virginia">West Virginia</option>
+                            <option value="Wisconsin">Wisconsin</option>
+                            <option value="Wyoming">Wyoming</option>
+                          </select>
+                <label>State</label>
+              </div>
+
+              <div class="input-field">
+                <i class="material-icons prefix">gps_fixed</i>
+
+                <select id="radius">
+                            <option value="" disabled selected>Select</option>
+                            <option value="5">5 miles</option>
+                            <option value="10">10 miles</option>
+                            <option value="15">15 miles</option>
+                            <option value="25">25 miles</option>
+                            <option value="50">50 miles</option>
+                            <option value="75">75 miles</option>
+                            <option value="100">100 miles</option>
+                            <option value="250">250 miles</option>
+                          </select>
+                <label>Max Distance</label>
+              </div>
+
             </div>
           </div>
+        </div>
+
+
+        <!--results-->
+
+        <div class="container">
+          <div class="row">
+            <div class="results">
+
+            </div>
+
+          </div>
+        </div>
+  </main>
+
+  <!--Footer-->
+  <footer id="footer-fixed" class="page-footer fixed">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m6">
+          <h5 class="white-text">Tour List</h5>
+          <p class="grey-text text-lighten-4">Get Tour Information Fast</p>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Contact</h5>
+          <ul>
+            <li>
+              <a class="white-text" href="https://twitter.com/ui_engineer">
+                <i class="small fa fa-twitter-square white-text"></i> Twitter
+              </a>
+            </li>
+            <li>
+              <a class="white-text" href="https://github.com/michaelfriedman">
+                <i class="small fa fa-github-square white-text"></i> Github
+              </a>
+            </li>
+            <li>
+              <a class="white-text" href="https://www.linkedin.com/in/michaeldavidfriedman">
+                <i class="small fa fa-linkedin-square white-text"></i> Linkedin
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-    </main>
-
-    <footer class="page-footer fixed blue-grey">
+    <div class="footer-copyright">
       <div class="container">
-        <div class="row">
-          <div class="col s12 m6">
-            <h5 class="white-text">bandsintown</h5>
-            <p class="grey-text text-lighten-4">Tag Line Here</p>
-          </div>
-          <div class="col s12 m4 offset-m2">
-            <ul>
-              <li><a class="grey-text text-lighten-3" href="#">Lorem Ipsum</a></li>
-              <li><a class="grey-text text-lighten-3" href="#">More Lorem Ipsum</a></li>
-            </ul>
-          </div>
-        </div>
+        Designed By <a class="white-text" href="http://michaeldavidfriedman.com">Michael Friedman</a>.
       </div>
-      <div class="footer-copyright blue-grey lighten-1">
-        <div class="container">
-          <div class="row">
-            <div class="s12">
-              © 2016 Lorem Ipsum Inc.
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </body>
+    </div>
+  </footer>
+</body>
+
 </html>
