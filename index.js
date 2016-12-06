@@ -1,11 +1,10 @@
 (function() {
   'use strict';
-
   $('.button-collapse').sideNav();
   $('select').material_select();
 
   const clearSearch = function() {
-    $('input[type=text], textarea').val('');
+    $('#search-input[type=text], textarea').val('');
   };
 
   const renderEvents = function(state) {
@@ -56,7 +55,7 @@
     console.log(state);
     const fbPage = $('<a>').prop('href', state.facebook_page_url);
     const fbTour = $('<a>').prop('href',
-        state.facebook_tour_dates_url).text('Facebook Tour Page');
+        state.facebook_tour_dates_url).text('Tour Page');
     const rowDiv = $('<div>').prop('class', 'row');
     const colDiv = $('<div>').prop('class', 'col s12 m6 l6');
     const cardDiv = $('<div>').prop('class', 'card');
@@ -98,13 +97,13 @@
     getEvents(input);
   };
 
-  $('#search').on('focus', () => {
+  $('#search-input').on('focus', () => {
     clearSearch();
   });
 
-  $('#search').keyup((event) => {
+  $('#search-input').keyup((event) => {
     const code = event.which;
-    const input = $('input').val();
+    const input = $('#search-input').val();
 
     if (code === 13) {
       clearSearch();
@@ -119,8 +118,7 @@
   });
 
   $('.search-button').click(() => {
-    const input = $('input').val();
-
+    const input = $('#search-input').val();
     clearSearch();
     if (input.trim() === '' || input.trim() === 'Enter Your Search Here') {
       Materialize.toast('Please Enter an Artist or Group', 4000);
@@ -130,4 +128,53 @@
     $('.results').empty();
     getArtists(input);
   });
+
+  $('#advanced-button').click(() => {
+    const input = $('#search-input').val();
+    const city = $('#city').val();
+    const state = $('#state').val();
+    const radius = $('#radius').val();
+
+    clearSearch();
+    if (input.trim() === '' || input.trim() === 'Enter Your Search Here') {
+      Materialize.toast('Please Enter an Artist or Group', 4000);
+
+      return;
+    }
+    $('.results').empty();
+    $.ajax({
+      type: 'GET',
+      url: `http://api.bandsintown.com/artists/${input}.json?api_version=2.0&app_id=michaelfriedman`,
+      success: (state) => {
+        console.log('artist', state)
+        if (!state.name) {
+          Materialize.toast('Sorry, no match found.', 4000);
+        }
+        else {
+          createProfile(state);
+        }
+      },
+      dataType: 'jsonp'
+    });
+    $.ajax({
+      type: 'GET',
+      url: `http://api.bandsintown.com/artists/${input}/events/search.json?api_version=2.0&app_id=michaelfriedman&location=${city},${state}&radius=${radius}`,
+      success: (state) => {
+        renderEvents(state);
+      },
+      dataType: 'jsonp'
+    });
+  });
+
+  $('input:checkbox').change(function() {
+    if($(this).is(':checked')){
+        $('#advanced').removeClass('hide');
+        $('#advanced-button').removeClass('hide');
+        $('#search-button').hide()
+    } else {
+      $('#search-button').show()
+      $('#advanced').addClass('hide');
+      $('#advanced-button').addClass('hide');
+    }
+});
 })();
