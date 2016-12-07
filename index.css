@@ -50,10 +50,18 @@ body {
     cursor: pointer;
 }
 
+
+.inputsDiv {
+  max-width: 400px
+}
 .dodgerblue {
   background-color: dodgerblue;
 }
 
 #footer-fixed {
   background-color: dodgerblue;
+}
+
+#switch-block {
+  display: inline;
 }
