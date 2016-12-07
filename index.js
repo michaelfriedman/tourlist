@@ -62,31 +62,42 @@
   };
 
   const createProfile = function(state) {
-    const fbPage = $('<a>').prop('href', state.facebook_page_url);
-    const fbTour = $('<a>').prop('href',
-        state.facebook_tour_dates_url).text('Tour Page');
+    const fbPage = $('<a>').prop('href', state.facebook_page_url).text('Facebook').css('display', 'block');
+    const tourPage = $('<a>').prop('href',
+        state.facebook_tour_dates_url).text('Tour Page').css('display', 'block');
     const rowDiv = $('<div>').prop('class', 'row');
     const colDiv = $('<div>').prop('class', 'col s12 m6 l6');
     const cardDiv = $('<div>').prop('class', 'card');
     const cardImageDiv = $('<div>').prop('class', 'card-image');
     const profileImg = $('<img>').prop('src', state.thumb_url);
-    const cardTitle = $('<span>').prop('class', 'card-title').text(state.name);
+    const cardTitle = $('<h4>').prop('class', 'card-title').text(state.name);
     const cardContent = $('<div>').prop('class', 'card-content');
     const linkDiv = $('<div>').prop('class', 'card-action');
     const cardLink = $('<a>')
       .prop('href', state.facebook_page_url).text('Facebook Page');
     const howManyEvents = $('<p>').text(`${state.name} Upcoming Events: ${state.upcoming_event_count}`);
 
-    rowDiv.append(colDiv);
-    colDiv.append(cardDiv);
-    cardDiv.append(cardImageDiv).append(cardContent).append(linkDiv);
-    cardImageDiv.append(profileImg)
-      .append(cardTitle);
-    cardContent.append(howManyEvents);
-    linkDiv.append(cardLink).append(fbTour);
-    fbPage.text('Facebook Page');
-    $('.results')
-    .append(rowDiv);
+    const responsiveImg = $('<img>')
+      .prop({ class: 'responsive-img', src: state.thumb_url }).css('border', '1px solid black');
+      $('.artistName').append(cardTitle).css('display', 'block')
+      $('.profileDiv').css('display', 'inline-block')
+
+        .append(responsiveImg).css('display', 'block');
+        console.log(fbPage)
+
+      $('.detailsDiv').css('display', 'inline-block')
+        .append(tourPage)
+        .append(fbPage)
+    // rowDiv.append(colDiv);
+    // colDiv.append(cardDiv);
+    // cardDiv.append(cardImageDiv).append(cardContent).append(linkDiv);
+    // cardImageDiv.append(profileImg)
+    //   .append(cardTitle);
+    // cardContent.append(howManyEvents);
+    // linkDiv.append(cardLink).append(fbTour);
+    // fbPage.text('Facebook Page');
+    // $('.profileDiv')
+    // .append(rowDiv);
   };
 
   const getArtists = function(input) {
@@ -137,6 +148,8 @@
       return;
     }
     $('.results').empty();
+    $('.artistName, .profileDiv, .detailsDiv').empty();
+
     clearSearch();
     $.ajax({
       type: 'GET',
@@ -171,6 +184,8 @@
       }
       else {
         $('.results').empty();
+        $('.artistName, .profileDiv, .detailsDiv').empty();
+
         getArtists(input);
       }
     }
@@ -184,6 +199,7 @@
       return;
     }
     $('.results').empty();
+    $('.artistName, .profileDiv, .detailsDiv').empty();
     clearSearch();
     getArtists(input);
   });
@@ -206,57 +222,3 @@
     }
   });
 })();
-
-var substringMatcher = function(strs) {
-  return function findMatches(q, cb) {
-    var matches, substringRegex;
-
-    // an array that will be populated with substring matches
-    matches = [];
-
-    // regex used to determine if a string contains the substring `q`
-    substrRegex = new RegExp(q, 'i');
-
-    // iterate through the pool of strings and for any string that
-    // contains the substring `q`, add it to the `matches` array
-    $.each(strs, function(i, str) {
-      if (substrRegex.test(str)) {
-        matches.push(str);
-      }
-    });
-
-    cb(matches);
-  };
-};
-
-var artists = ['the string cheese incident', 'phish', 'sts9', 'beats antique', 'kid rock',
-  'guns n roses', 'red hot chili peppers', 'dave matthews band', 'u2', 'Georgia', 'Hawaii',
-  'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-  'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-  'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-  'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-  'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-];
-
-var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-  'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-  'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-  'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-  'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-  'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-  'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-];
-
-$('#the-basics .typeahead').typeahead({
-  hint: true,
-  highlight: true,
-  minLength: 1
-},
-{
-  name: 'artists',
-  source: substringMatcher(artists)
-});
