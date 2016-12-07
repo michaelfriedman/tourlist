@@ -2,7 +2,7 @@
   'use strict';
   $('.button-collapse').sideNav({
     menuWidth: 300, // Default is 240
-    edge: 'right', // Choose the horizontal origin
+    edge: 'left', // Choose the horizontal origin
     closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
     draggable: true // Choose whether you can drag to open on touch screens
   }
@@ -18,7 +18,7 @@
 
     for (const show of shows) {
       const collectionDiv = $('<ul>')
-        .prop('class', 'collection with-header');
+        .prop('class', 'collection with-header center');
       const liHeader = $('<li>').prop('class', 'collection-header');
       const showTitle = $('<h4>');
       const showDateContainer = $('<li>').prop('class', 'collection-item');
@@ -62,42 +62,30 @@
   };
 
   const createProfile = function(state) {
-    const fbPage = $('<a>').prop('href', state.facebook_page_url).text('Facebook').css('display', 'block');
-    const tourPage = $('<a>').prop('href',
-        state.facebook_tour_dates_url).text('Tour Page').css('display', 'block');
-    const rowDiv = $('<div>').prop('class', 'row');
-    const colDiv = $('<div>').prop('class', 'col s12 m6 l6');
-    const cardDiv = $('<div>').prop('class', 'card');
-    const cardImageDiv = $('<div>').prop('class', 'card-image');
-    const profileImg = $('<img>').prop('src', state.thumb_url);
-    const cardTitle = $('<h4>').prop('class', 'card-title').text(state.name);
-    const cardContent = $('<div>').prop('class', 'card-content');
-    const linkDiv = $('<div>').prop('class', 'card-action');
+    const fbPage = $('<a>')
+      .prop('href', state.facebook_page_url)
+      .text('Facebook')
+      .css('display', 'block');
+    const tourPage = $('<a>')
+      .prop('href', state.facebook_tour_dates_url)
+      .text('Tour Page')
+      .css('display', 'block');
+    const cardTitle = $('<h4>').prop('class', 'center').text(state.name);
     const cardLink = $('<a>')
       .prop('href', state.facebook_page_url).text('Facebook Page');
-    const howManyEvents = $('<p>').text(`${state.name} Upcoming Events: ${state.upcoming_event_count}`);
-
+    const howManyEvents = $('<p>')
+      .text(`${state.name} Upcoming Events: ${state.upcoming_event_count}`);
     const responsiveImg = $('<img>')
-      .prop({ class: 'responsive-img', src: state.thumb_url }).css('border', '1px solid black');
-      $('.artistName').append(cardTitle).css('display', 'block')
-      $('.profileDiv').css('display', 'inline-block')
+      .prop({ class: 'responsive-img left', src: state.thumb_url })
+      .css('border', '1px solid black');
 
-        .append(responsiveImg).css('display', 'block');
-        console.log(fbPage)
-
-      $('.detailsDiv').css('display', 'inline-block')
-        .append(tourPage)
-        .append(fbPage)
-    // rowDiv.append(colDiv);
-    // colDiv.append(cardDiv);
-    // cardDiv.append(cardImageDiv).append(cardContent).append(linkDiv);
-    // cardImageDiv.append(profileImg)
-    //   .append(cardTitle);
-    // cardContent.append(howManyEvents);
-    // linkDiv.append(cardLink).append(fbTour);
-    // fbPage.text('Facebook Page');
-    // $('.profileDiv')
-    // .append(rowDiv);
+    $('.artistName').append(cardTitle).css('display', 'block');
+    $('.profileDiv').css('display', 'inline-block')
+        .append(responsiveImg);
+    $('.detailsDiv').css('display', 'inline-block')
+      .append(tourPage)
+      .append(fbPage)
+      .append(howManyEvents);
   };
 
   const getArtists = function(input) {
@@ -122,7 +110,6 @@
   });
 
   const advancedSearch = function(input) {
-    // const input = $('#search-input').val();
     const city = $('#city').val();
     const region = $('#state').val();
     const radius = $('#radius').val();
@@ -193,6 +180,7 @@
 
   $('.search-button').click(() => {
     const input = $('#search-input').val();
+
     if (input.trim() === '' || input.trim() === 'Enter Your Search Here') {
       Materialize.toast('Please Enter an Artist or Group', 4000);
 
@@ -206,6 +194,7 @@
 
   $('#advanced-button').click(() => {
     const input = $('#search-input').val();
+
     advancedSearch(input);
   });
 

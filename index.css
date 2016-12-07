@@ -2,12 +2,14 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background-color: ghostwhite;
   }
 
   main {
     flex: 1 0 auto;
     margin: 30px;
   }
+
 
 .brand-logo, .button-collapse {
   margin-left: 20px;
@@ -30,12 +32,12 @@ body {
 }
 
 .switch label input[type=checkbox]:checked+.lever:after {
-    background-color: red;
+    background-color: rgb(141, 230, 222);
     left: 24px;
 }
 
 .switch label input[type=checkbox]:checked+.lever {
-    background-color: red;
+    background-color: rgb(141, 230, 222);
 }
 
 
@@ -52,7 +54,11 @@ body {
 
 
 .inputsDiv {
-  max-width: 400px
+  max-width: 400px;
+  border: 1px solid black;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 3px;
 }
 .dodgerblue {
   background-color: dodgerblue;
@@ -64,4 +70,96 @@ body {
 
 #switch-block {
   display: inline;
+}
+
+
+
+.btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: dodgerblue;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+}
+.waves-effect {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    z-index: 1;
+    will-change: opacity, transform;
+    transition: .3s ease-out;
+}
+.btn, .btn-large {
+    text-decoration: none;
+    color: #fff;
+    background-color: dodgerblue;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+}
+.btn, .btn-large, .btn-floating, .btn-large, .btn-flat {
+    outline: 0;
+}
+.btn, .btn-large, .btn-flat {
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 1rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.collection {
+    margin: 0.5rem 0 1rem 0;
+    border: 1px solid black;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    max-width: 350px;
+    display: inline-block;
+    margin: 20px;
+}
+
+.collection.with-header .collection-item {
+    padding-left: 30px;
+}
+
+.collection-header {
+    background-color: #fff;
+    border-bottom: 1px solid grey;
+    padding: 10px 20px;
+    min-height: 200px
+}
+.collection a.collection-item {
+    display: block;
+    transition: .25s;
+    color: dodgerblue;
+}
+.collection .collection-item {
+    background-color: #fff;
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid grey;
+}
+
+.resultsContainer {
+  max-width: 200px;
+}
+
+.responsive-img {
+  border-radius: 50%;
 }
