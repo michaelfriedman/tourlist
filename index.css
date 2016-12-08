@@ -204,8 +204,23 @@ div.profile.collection {
   justify-content: center;
 }
 
+#events-header.collection-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 20px;
+    min-height: 155px;
+    max-height: 155px;
+}
+
+.collection {
+  min-width: 344px;
+  max-width: 344px;
+}
 
 
+
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.1); }
 /**/
 /*
 #profile .collection.with-header .collection-header {
