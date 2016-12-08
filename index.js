@@ -5,8 +5,7 @@
     edge: 'left', // Choose the horizontal origin
     closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
     draggable: true // Choose whether you can drag to open on touch screens
-  }
-  );
+  });
   $('select').material_select();
 
   const clearSearch = function() {
@@ -17,33 +16,40 @@
     const shows = state;
 
     for (const show of shows) {
+      console.log(show)
+
       const collectionDiv = $('<ul>')
         .prop('class', 'collection with-header center');
       const liHeader = $('<li>').prop('class', 'collection-header');
-      const showTitle = $('<h4>');
+      let showTitle;
+      const venue = $('<li>').prop('class', 'collection-header')
+        .text(show.venue.place);
       const showDateContainer = $('<li>').prop('class', 'collection-item');
       const showDirectionsContainer = $('<a>')
         .prop({ class: 'collection-item', href: `http://maps.google.com/maps?q=${show.venue.latitude},${show.venue.longitude}`, text: 'Directions to Venue' });
-      let ticketsAvailableContainer;
+      let ticketsAvailableContainer = $('<a>')
+        .prop({ class: 'btn', href: show.ticket_url, text: 'Buy Tickets' });
 
       show.ticket_url === null
       ? ticketsAvailableContainer = $('<li>')
         .prop({
-          // href: show.ticket_url,
-          class: 'collection-item',
-          // text: `Tickets are ${show.ticket_status}.`
+          class: 'collection-item'
         }).text(`Tickets are ${show.ticket_status}.`)
-      : ticketsAvailableContainer = $('<a>')
+      : ticketsAvailableContainer = $('<li>')
         .prop({
-          href: show.ticket_url,
-          class: 'collection-item',
-          text: 'Buy Tickets'
-        });
-      liHeader.append(showTitle);
+          class: 'collection-item'
+        }).append(ticketsAvailableContainer);
+
       showDateContainer.text(show.formatted_datetime);
-      showTitle.text(show.title);
+      console.log(show.title.length);
+      show.title.length > 35
+        ? showTitle = $('<h4>').text(`${show.title.slice(0, 35)}...`)
+        : showTitle = $('<h4>').text(show.title);
+      liHeader.append(showTitle);
+      console.log(showTitle)
       collectionDiv.append(liHeader)
       .append(showDateContainer)
+      .append(venue)
       .append(ticketsAvailableContainer)
       .append(showDirectionsContainer);
       $('.results').append(collectionDiv);
@@ -62,30 +68,25 @@
   };
 
   const createProfile = function(state) {
-    const fbPage = $('<a>')
-      .prop('href', state.facebook_page_url)
-      .text('Facebook')
-      .css('display', 'block');
-    const tourPage = $('<a>')
-      .prop('href', state.facebook_tour_dates_url)
-      .text('Tour Page')
-      .css('display', 'block');
-    const cardTitle = $('<h4>').prop('class', 'center').text(state.name);
-    const cardLink = $('<a>')
-      .prop('href', state.facebook_page_url).text('Facebook Page');
-    const howManyEvents = $('<p>')
-      .text(`${state.name} Upcoming Events: ${state.upcoming_event_count}`);
-    const responsiveImg = $('<img>')
-      .prop({ class: 'responsive-img left', src: state.thumb_url })
-      .css('border', '1px solid black');
-
-    $('.artistName').append(cardTitle).css('display', 'block');
-    $('.profileDiv').css('display', 'inline-block')
-        .append(responsiveImg);
-    $('.detailsDiv').css('display', 'inline-block')
-      .append(tourPage)
-      .append(fbPage)
-      .append(howManyEvents);
+    console.log(state)
+    $('#profile').empty();
+    const rowDiv = $('<div>').prop('class', 'row');
+    const profileImg = $('<img>').prop({ src: state.thumb_url, class: 'profileImg' });
+    const profileDiv = $('<ul>')
+      .prop('class', 'collection with-header center');
+    const profileHeader = $('<li>').prop('class', 'collection-header profileHeader')
+    const artistTitle = $('<h5>').text(state.name);
+    let detailsContainer;
+    state.name.slice(-1) === 's' ? detailsContainer = $('<li>').prop('class', 'collection-item').text(`${state.name} Have ${state.upcoming_event_count} Shows`) : detailsContainer = $('<li>').prop('class', 'collection-item').text(`${state.name} Has ${state.upcoming_event_count} Upcoming Shows`);
+    const linkContainer = $('<a>')
+    .prop({ class: 'collection-item', href: state.facebook_page_url }).text('Facebook');
+    const linkContainer2 = $('<a>').prop({ class: 'collection-item', href: state.facebook_tour_dates_url }).text('Tour Page');
+    profileHeader.append(profileImg).append(artistTitle);
+    profileDiv.append(profileHeader)
+    .append(detailsContainer).append(linkContainer2)
+    .append(linkContainer);
+    rowDiv.append(profileDiv)
+    $('#profile').append(rowDiv);
   };
 
   const getArtists = function(input) {
@@ -135,7 +136,7 @@
       return;
     }
     $('.results').empty();
-    $('.artistName, .profileDiv, .detailsDiv').empty();
+    $('.artistName, .profile, .detailsDiv').empty();
 
     clearSearch();
     $.ajax({

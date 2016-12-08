@@ -2,7 +2,7 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-color: ghostwhite;
+    background-color: black;
   }
 
   main {
@@ -32,12 +32,12 @@ body {
 }
 
 .switch label input[type=checkbox]:checked+.lever:after {
-    background-color: rgb(141, 230, 222);
+    background-color: pink;
     left: 24px;
 }
 
 .switch label input[type=checkbox]:checked+.lever {
-    background-color: rgb(141, 230, 222);
+    background-color: pink;
 }
 
 
@@ -54,11 +54,13 @@ body {
 
 
 .inputsDiv {
-  max-width: 400px;
+  max-width: 344px;
   border: 1px solid black;
   padding: 20px;
   background-color: #fff;
   border-radius: 3px;
+  justify-content: space-between;
+  min-width: 344px;
 }
 .dodgerblue {
   background-color: dodgerblue;
@@ -72,6 +74,9 @@ body {
   display: inline;
 }
 
+ul.collection {
+  max-width: 344px;
+}
 
 
 .btn, .btn-large {
@@ -125,12 +130,13 @@ body {
 .collection {
     margin: 0.5rem 0 1rem 0;
     border: 1px solid black;
-    border-radius: 2px;
+    border-radius: 3px;
     overflow: hidden;
     position: relative;
     max-width: 350px;
     display: inline-block;
     margin: 20px;
+    min-width: 300px;
 }
 
 .collection.with-header .collection-item {
@@ -142,6 +148,10 @@ body {
     border-bottom: 1px solid grey;
     padding: 10px 20px;
     min-height: 200px
+    justify-content: space-around;;
+    align-items: center;
+    vertical-align: middle;
+    /*max-height: 230px;*/
 }
 .collection a.collection-item {
     display: block;
@@ -156,10 +166,75 @@ body {
     border-bottom: 1px solid grey;
 }
 
+
+
 .resultsContainer {
   max-width: 200px;
 }
 
 .responsive-img {
-  border-radius: 50%;
+  /*border-radius: 50%;*/
+  /*width: 100%*/
 }
+
+.contact {
+  position: absolute;;
+  right: 0px;
+}
+
+.card {
+  background-color: ghostwhite;
+}
+
+.profileImg {
+  border: 2px solid black;
+  /*border-radius: 50%;*/
+  /*padding: 5px*/
+}
+div.container.inputsDiv {
+  justify-content: center;
+}
+
+div.profile.collection {
+  width: 200px;
+  justify-content: center;
+}
+
+.results {
+  justify-content: center;
+}
+
+
+
+/**/
+/*
+#profile .collection.with-header .collection-header {
+    background-color: black;
+    color: white;
+    border-bottom: 1px solid rgb(224, 224, 224);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(224, 224, 224);
+    padding: 10px 20px;
+}*/
+
+/*div.container.inputsDiv {
+    justify-content: center;
+}
+.inputsDiv {
+    max-width: 400px;
+    border: 1px solid black;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 3px;
+    justify-content: space-between;
+}
+@media only screen and (min-width: 601px)
+.container {
+    width: 85%;
+}
+.container {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 90%;
+}*/
