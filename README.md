@@ -20,7 +20,7 @@ Tour List is a web application that provides an easy to read format of music tou
 Bandsintown API
 
 ### What technologies did it use?
-HTML, CSS, JavaScript, jQuery, Materialize, AJAX
+HTML, CSS, JavaScript, jQuery, Materialize, AJAX, localStorage
 
 ### What was the most valuable piece of Customer feedback you received?
 Limit focus to central product and achieving primary user stories, not worry about adding extra features.

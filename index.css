@@ -84,7 +84,7 @@ ul.collection {
 .btn-large {
   text-decoration: none;
   color: #fff;
-  background-color: dodgerblue;
+  background-color: dodgerblue !important;
   text-align: center;
   letter-spacing: .5px;
   transition: .2s ease-out;
@@ -100,7 +100,7 @@ ul.collection {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: dodgerblue;
   vertical-align: middle;
   z-index: 1;
   will-change: opacity, transform;
@@ -196,7 +196,7 @@ ul.collection {
 }
 
 .grow:hover {
-  transform: scale(1.1);
+  transform: scale(1.02);
 }
 
 .side-nav a.btn, .side-nav a.btn-small, .side-nav a.btn-large, .side-nav a.btn-flat, .side-nav a.btn-floating {
@@ -209,4 +209,8 @@ ul.collection {
 
 #switch-block {
   display: inline;
+}
+
+#search-button {
+  margin-bottom: 5px;
 }
