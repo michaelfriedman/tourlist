@@ -19,6 +19,7 @@
 
       JSON.parse(localStorage.getItem(search.facebook_page_url))
       const obj = JSON.parse(localStorage.getItem(search))
+
       console.log(obj)
       const href = obj.facebook_page_url
       const imgSrc = obj.thumb_url
@@ -32,8 +33,14 @@
   const storeRecentSearches = function(input) {
     const searches = JSON.parse(localStorage.getItem('searches')) || [];
     let i = searches.length;
-    searches[i] = input;
-    localStorage.setItem('searches', JSON.stringify(searches));
+    if (input !== '' && input !== null) {
+      searches[i] = input;
+      localStorage.setItem('searches', JSON.stringify(searches));
+    }
+    else {
+      return;
+    }
+
   }
 
   const renderEvents = function(state) {
