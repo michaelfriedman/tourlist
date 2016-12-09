@@ -1,18 +1,42 @@
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    background-color: black;
-  }
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: black;
+}
 
-  main {
-    flex: 1 0 auto;
-    margin: 30px;
-  }
+main {
+  flex: 1 0 auto;
+  margin: 30px;
+}
 
+div.container.inputsDiv {
+  justify-content: center;
+}
 
-.brand-logo, .button-collapse {
+div.profile.collection {
+  width: 200px;
+  justify-content: center;
+}
+
+ul.collection {
+  max-width: 344px;
+}
+
+.brand-logo,
+.button-collapse {
   margin-left: 20px;
+}
+
+.btn,
+.btn-large {
+  text-decoration: none;
+  color: #fff;
+  background-color: inherit;
+  text-align: center;
+  letter-spacing: .5px;
+  transition: .2s ease-out;
+  cursor: pointer;
 }
 
 .page-footer {
@@ -27,29 +51,18 @@ body {
 .icon-block {
   padding: 0 15px;
 }
+
 .icon-block .material-icons {
-	font-size: inherit;
+  font-size: inherit;
 }
 
 .switch label input[type=checkbox]:checked+.lever:after {
-    background-color: pink;
-    left: 24px;
+  background-color: pink;
+  left: 24px;
 }
 
 .switch label input[type=checkbox]:checked+.lever {
-    background-color: pink;
-}
-
-
-
-.btn, .btn-large {
-    text-decoration: none;
-    color: #fff;
-    background-color: red;
-    text-align: center;
-    letter-spacing: .5px;
-    transition: .2s ease-out;
-    cursor: pointer;
+  background-color: pink;
 }
 
 
@@ -62,111 +75,78 @@ body {
   justify-content: space-between;
   min-width: 344px;
 }
+
 .dodgerblue {
   background-color: dodgerblue;
 }
 
-#footer-fixed {
+.btn,
+.btn-large {
+  text-decoration: none;
+  color: #fff;
   background-color: dodgerblue;
+  text-align: center;
+  letter-spacing: .5px;
+  transition: .2s ease-out;
+  cursor: pointer;
 }
 
-#switch-block {
-  display: inline;
-}
-
-ul.collection {
-  max-width: 344px;
-}
-
-
-.btn, .btn-large {
-    text-decoration: none;
-    color: #fff;
-    background-color: dodgerblue;
-    text-align: center;
-    letter-spacing: .5px;
-    transition: .2s ease-out;
-    cursor: pointer;
-}
 .waves-effect {
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-    overflow: hidden;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    vertical-align: middle;
-    z-index: 1;
-    will-change: opacity, transform;
-    transition: .3s ease-out;
-}
-.btn, .btn-large {
-    text-decoration: none;
-    color: #fff;
-    background-color: dodgerblue;
-    text-align: center;
-    letter-spacing: .5px;
-    transition: .2s ease-out;
-    cursor: pointer;
-}
-.btn, .btn-large, .btn-floating, .btn-large, .btn-flat {
-    outline: 0;
-}
-.btn, .btn-large, .btn-flat {
-    border: none;
-    border-radius: 2px;
-    display: inline-block;
-    height: 25px;
-    line-height: 25px;
-    padding: 0 1rem;
-    text-transform: uppercase;
-    vertical-align: middle;
-    -webkit-tap-highlight-color: transparent;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  z-index: 1;
+  will-change: opacity, transform;
+  transition: .3s ease-out;
 }
 
 .collection {
-    margin: 0.5rem 0 1rem 0;
-    border: 1px solid black;
-    border-radius: 3px;
-    overflow: hidden;
-    position: relative;
-    max-width: 350px;
-    display: inline-block;
-    margin: 20px;
-    min-width: 300px;
+  margin: 0.5rem 0 1rem 0;
+  border: 1px solid black;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  max-width: 350px;
+  display: inline-block;
+  margin: 20px;
+  min-width: 300px;
 }
 
 .collection.with-header .collection-item {
-    padding-left: 30px;
+  padding-left: 30px;
 }
 
 .collection-header {
-    background-color: #fff;
-    border-bottom: 1px solid grey;
-    padding: 10px 20px;
-    min-height: 200px
-    justify-content: space-around;;
-    align-items: center;
-    vertical-align: middle;
-    /*max-height: 230px;*/
+  background-color: #fff;
+  border-bottom: 1px solid grey;
+  padding: 10px 20px;
+  min-height: 200px justify-content: space-around;
+  ;
+  align-items: center;
+  vertical-align: middle;
+  /*max-height: 230px;*/
 }
+
 .collection a.collection-item {
-    display: block;
-    transition: .25s;
-    color: dodgerblue;
+  display: block;
+  transition: .25s;
+  color: dodgerblue;
 }
+
 .collection .collection-item {
-    background-color: #fff;
-    line-height: 1.5rem;
-    padding: 10px 20px;
-    margin: 0;
-    border-bottom: 1px solid grey;
+  background-color: #fff;
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  border-bottom: 1px solid grey;
 }
-
-
 
 .resultsContainer {
   max-width: 200px;
@@ -178,7 +158,7 @@ ul.collection {
 }
 
 .contact {
-  position: absolute;;
+  position: absolute;
   right: 0px;
 }
 
@@ -191,25 +171,19 @@ ul.collection {
   /*border-radius: 50%;*/
   /*padding: 5px*/
 }
-div.container.inputsDiv {
-  justify-content: center;
-}
 
-div.profile.collection {
-  width: 200px;
-  justify-content: center;
-}
+
 
 .results {
   justify-content: center;
 }
 
 #events-header.collection-header {
-    background-color: #fff;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 10px 20px;
-    min-height: 155px;
-    max-height: 155px;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 20px;
+  min-height: 155px;
+  max-height: 155px;
 }
 
 .collection {
@@ -217,39 +191,22 @@ div.profile.collection {
   max-width: 344px;
 }
 
-
-
-.grow { transition: all .2s ease-in-out; }
-.grow:hover { transform: scale(1.1); }
-/**/
-/*
-#profile .collection.with-header .collection-header {
-    background-color: black;
-    color: white;
-    border-bottom: 1px solid rgb(224, 224, 224);
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: rgb(224, 224, 224);
-    padding: 10px 20px;
-}*/
-
-/*div.container.inputsDiv {
-    justify-content: center;
+.grow {
+  transition: all .2s ease-in-out;
 }
-.inputsDiv {
-    max-width: 400px;
-    border: 1px solid black;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 3px;
-    justify-content: space-between;
+
+.grow:hover {
+  transform: scale(1.1);
 }
-@media only screen and (min-width: 601px)
-.container {
-    width: 85%;
+
+.side-nav a.btn, .side-nav a.btn-small, .side-nav a.btn-large, .side-nav a.btn-flat, .side-nav a.btn-floating {
+    margin: 0x;
 }
-.container {
-    margin: 0 auto;
-    max-width: 1280px;
-    width: 90%;
-}*/
+
+#footer-fixed {
+  background-color: dodgerblue;
+}
+
+#switch-block {
+  display: inline;
+}

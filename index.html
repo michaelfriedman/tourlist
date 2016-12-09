@@ -12,8 +12,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
   <link rel="stylesheet" href="index.css">
 </head>
-
 <body>
+  <ul id="nav-mobile" class="side-nav">
+    <li><a href="mailto:contact@michaeldavidfriedman.com">Email Us</a></li>
+    <li><b>Recent Searches</b></li>
+    <ul id="recent-searches">
+      <li><button id="clear" href="#" class="btn">Clear</></li>
+    </ul>
+  </ul>
   <div class="navbar-fixed">
     <nav id="nav-fixed" class="default_color dodgerblue">
       <div class="container">
@@ -22,15 +28,12 @@
           <ul class="right hide-on-med-and-down">
             <!-- nav stuff here -->
           </ul>
-          <ul id="nav-mobile" class="side-nav">
-            <!-- nav stuff here -->
-          </ul>
+
           <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>
       </div>
     </nav>
   </div>
-
   <main>
     <div class="container inputsDiv">
       <div class="row">
@@ -39,8 +42,8 @@
             <i class="material-icons prefix">search</i>
             <input id="search-input" class="validate" type="text" placeholder="Artist or Group Name">
             <label for="search-input">Search For Show Information</label>
-            <a id="search-button" class="btn search-button btn dodgerblue grow" href="#hotLink"><i class="material-icons left">search</i>SEARCH</a>
-            <a id="advanced-button" class="hide btn dodgerblue grow"><i class="material-icons left">search</i>SEARCH</a>
+            <a id="search-button" class="btn search-button btn dodgerblue" href="#hotLink"><i class="material-icons left">search</i>SEARCH</a>
+            <a id="advanced-button" class="hide btn dodgerblue"><i class="material-icons left">search</i>SEARCH</a>
           </div>
           <div class="switch right">
             <label>
@@ -124,7 +127,6 @@
                 <option value="50">50 miles</option>
                 <option value="75">75 miles</option>
                 <option value="100">100 miles</option>
-                <option value="250">250 miles</option>
               </select>
               <label>Max Distance</label>
             </div>
@@ -132,12 +134,8 @@
         </div>
       </div>
     </div>
-
-
     <div id="hotLink">
-
     </div>
-
     <br>
     <br>
     <br>
@@ -147,25 +145,21 @@
         <div class="row center">
           <div id="profile" class="center">
           </div>
-          <a href="#results"><i id="arrow" class="material-icons large grow grow:hover" style="color: white">keyboard_arrow_down</i></a>
+          <a href="#results"><i id="arrow" class="material-icons large grow" style="color: white">keyboard_arrow_down</i></a>
         </div>
         <br>
         <br>
         <br>
-
         <div id="results" class="row">
           <br>
           <br>
           <br>
           <div class="results center">
-
           </div>
         </div>
       </div>
-
     </div>
   </main>
-
   <!--Footer-->
   <footer id="footer-fixed" class="page-footer fixed">
     <div class="container">

@@ -1,16 +1,40 @@
 (function() {
   'use strict';
-  $('.button-collapse').sideNav({
-    menuWidth: 300, // Default is 240
-    edge: 'left', // Choose the horizontal origin
-    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-    draggable: true // Choose whether you can drag to open on touch screens
-  });
   $('select').material_select();
   $('#arrow').hide();
   const clearSearch = function() {
     $('#search-input[type=text], textarea').val('');
   };
+
+  $('#clear').click(() => {
+    localStorage.clear();
+    location.reload()
+  });
+
+  const loadRecentSearches = function() {
+    const recentSearches = JSON.parse(localStorage.getItem('searches')) || [];
+
+    for (const search of recentSearches) {
+      // console.log(search)
+
+      JSON.parse(localStorage.getItem(search.facebook_page_url))
+      const obj = JSON.parse(localStorage.getItem(search))
+      console.log(obj)
+      const href = obj.facebook_page_url
+      const imgSrc = obj.thumb_url
+      console.log(href)
+      const recentSearchLI = $('<a>').prop({href: href, text: search, class: 'collection-item'})
+      $('#recent-searches').prepend(recentSearchLI);
+    }
+  };
+  loadRecentSearches()
+
+  const storeRecentSearches = function(input) {
+    const searches = JSON.parse(localStorage.getItem('searches')) || [];
+    let i = searches.length;
+    searches[i] = input;
+    localStorage.setItem('searches', JSON.stringify(searches));
+  }
 
   const renderEvents = function(state) {
     const shows = state;
@@ -69,6 +93,18 @@
 
   const createProfile = function(state) {
     $('#profile').empty();
+
+    const recentSearches = JSON.parse(localStorage.getItem(state.name)) || [];
+
+    for (const search of recentSearches) {
+      const recentSearchLI = $('<li>').text(search);
+        console.log(JSON.parse(localStorage.getItem(search)))
+
+      $('#recent-searches').prepend(recentSearchLI);
+    }
+
+
+    localStorage.setItem(state.name.toLowerCase(), JSON.stringify(state));
     const rowDiv = $('<div>').prop('class', 'row');
     const profileImg = $('<img>')
       .prop({ src: state.thumb_url, class: 'profileImg' });
@@ -97,10 +133,10 @@
     .append(linkContainer);
     rowDiv.append(profileDiv);
     $('#profile').append(rowDiv);
-    $('#arrow').show()
+    $('#arrow').show();
     $('html, body').animate({
-    scrollTop: $("#hotLink").offset().top
-}, 1000);
+      scrollTop: $('#hotLink').offset().top
+    }, 1000);
   };
 
   const getArtists = function(input) {
@@ -125,6 +161,7 @@
   });
 
   const advancedSearch = function(input) {
+    storeRecentSearches(input);
     const city = $('#city').val();
     const region = $('#state').val();
     const radius = $('#radius').val();
@@ -171,9 +208,9 @@
       url: `http://api.bandsintown.com/artists/${input}/events/search.json?api_version=2.0&app_id=michaelfriedman&location=${city},${region}&radius=${radius}`,
       success: (state) => {
         renderEvents(state);
-          $('html, body').animate({
-              scrollTop: $("#hotLink").offset().top
-          }, 1000);
+        $('html, body').animate({
+          scrollTop: $('#hotLink').offset().top
+        }, 1000);
       },
       dataType: 'jsonp'
     });
@@ -185,12 +222,13 @@
 
     if (code === 13) {
       if ($('input:checkbox').is(':checked')) {
+        storeRecentSearches(input)
         advancedSearch(input);
       }
       else {
         $('.results').empty();
         $('.artistName, .profileDiv, .detailsDiv').empty();
-
+        storeRecentSearches(input)
         getArtists(input);
       }
     }
@@ -198,6 +236,8 @@
 
   $('.search-button').click(() => {
     const input = $('#search-input').val();
+    storeRecentSearches(input)
+
 
     if (input.trim() === '' || input.trim() === 'Enter Your Search Here') {
       Materialize.toast('Please Enter an Artist or Group', 4000);
@@ -228,4 +268,5 @@
       $('#advanced-button').addClass('hide');
     }
   });
+  $('.button-collapse').sideNav();
 })();
