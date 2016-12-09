@@ -31,14 +31,19 @@
   loadRecentSearches()
 
   const storeRecentSearches = function(input) {
-    const searches = JSON.parse(localStorage.getItem('searches')) || [];
-    if (searches.includes(input)) {
-      input = null;
-    }
-    let i = searches.length;
-    if (input !== '' && input !== null) {
-      searches[i] = input;
-      localStorage.setItem('searches', JSON.stringify(searches));
+    if (localStorage !== undefined) {
+      const searches = JSON.parse(localStorage.getItem('searches')) || [];
+      if (searches.includes(input)) {
+        input = null;
+      }
+      let i = searches.length;
+      if (input !== '' && input !== null) {
+        searches[i] = input;
+        localStorage.setItem('searches', JSON.stringify(searches));
+      }
+      else {
+        return;
+      }
     }
     else {
       return;
