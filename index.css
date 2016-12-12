@@ -23,6 +23,15 @@ ul.collection {
   max-width: 344px;
 }
 
+.dodgerblue {
+  background-color: dodgerblue;
+}
+
+.page-footer {
+  position: relative;
+  bottom: 0;
+}
+
 .brand-logo,
 .button-collapse {
   margin-left: 20px;
@@ -30,6 +39,7 @@ ul.collection {
 
 .btn,
 .btn-large {
+  background-color: dodgerblue !important;
   text-decoration: none;
   color: #fff;
   background-color: inherit;
@@ -39,13 +49,18 @@ ul.collection {
   cursor: pointer;
 }
 
-.page-footer {
-  position: relative;
-  bottom: 0;
-}
-
 .hide {
   display: none;
+}
+
+.inputsDiv {
+  max-width: 344px;
+  border: 1px solid black;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 3px;
+  justify-content: space-between;
+  min-width: 344px;
 }
 
 .icon-block {
@@ -65,49 +80,9 @@ ul.collection {
   background-color: pink;
 }
 
-
-.inputsDiv {
-  max-width: 344px;
-  border: 1px solid black;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 3px;
-  justify-content: space-between;
-  min-width: 344px;
-}
-
-.dodgerblue {
-  background-color: dodgerblue;
-}
-
-.btn,
-.btn-large {
-  text-decoration: none;
-  color: #fff;
-  background-color: dodgerblue !important;
-  text-align: center;
-  letter-spacing: .5px;
-  transition: .2s ease-out;
-  cursor: pointer;
-}
-
-.waves-effect {
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-  overflow: hidden;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-tap-highlight-color: dodgerblue;
-  vertical-align: middle;
-  z-index: 1;
-  will-change: opacity, transform;
-  transition: .3s ease-out;
-}
-
 .collection {
+  min-width: 344px;
+  max-width: 344px;
   margin: 0.5rem 0 1rem 0;
   border: 1px solid black;
   border-radius: 3px;
@@ -119,19 +94,14 @@ ul.collection {
   min-width: 300px;
 }
 
-.collection.with-header .collection-item {
-  padding-left: 30px;
-}
-
 .collection-header {
   background-color: #fff;
   border-bottom: 1px solid grey;
   padding: 10px 20px;
-  min-height: 200px justify-content: space-around;
-  ;
+  min-height: 200px;
+  justify-content: space-around;
   align-items: center;
   vertical-align: middle;
-  /*max-height: 230px;*/
 }
 
 .collection a.collection-item {
@@ -148,31 +118,14 @@ ul.collection {
   border-bottom: 1px solid grey;
 }
 
-.resultsContainer {
-  max-width: 200px;
-}
-
-.responsive-img {
-  /*border-radius: 50%;*/
-  /*width: 100%*/
-}
-
 .contact {
   position: absolute;
   right: 0px;
 }
 
-.card {
-  background-color: ghostwhite;
-}
-
 .profileImg {
   border: 2px solid black;
-  /*border-radius: 50%;*/
-  /*padding: 5px*/
 }
-
-
 
 .results {
   justify-content: center;
@@ -186,31 +139,18 @@ ul.collection {
   max-height: 155px;
 }
 
-.collection {
-  min-width: 344px;
-  max-width: 344px;
-}
-
-.grow {
-  transition: all .2s ease-in-out;
-}
-
-.grow:hover {
-  transform: scale(1.02);
-}
-
-.side-nav a.btn, .side-nav a.btn-small, .side-nav a.btn-large, .side-nav a.btn-flat, .side-nav a.btn-floating {
-    margin: 0x;
-}
-
 #footer-fixed {
   background-color: dodgerblue;
 }
 
-#switch-block {
-  display: inline;
+#recent-searches-tag {
+  text-decoration: underline;
 }
 
 #search-button {
   margin-bottom: 5px;
+}
+
+#switch-block {
+  display: inline;
 }

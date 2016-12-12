@@ -8,35 +8,37 @@
 
   $('#clear').click(() => {
     localStorage.clear();
-    location.reload()
+    location.reload();
   });
 
   const loadRecentSearches = function() {
     const recentSearches = JSON.parse(localStorage.getItem('searches')) || [];
 
     for (const search of recentSearches) {
-      // console.log(search)
+      JSON.parse(localStorage.getItem(search.facebook_page_url));
+      const obj = JSON.parse(localStorage.getItem(search));
+      let recentSearchLI;
 
-      JSON.parse(localStorage.getItem(search.facebook_page_url))
-      const obj = JSON.parse(localStorage.getItem(search))
-
-      console.log(obj)
-      const href = obj.facebook_page_url
-      const imgSrc = obj.thumb_url
-      console.log(href)
-      const recentSearchLI = $('<a>').prop({href: href, text: search, class: 'collection-item'})
+      obj === null
+      ? recentSearchLI = $('<a>')
+        .prop({ href: '#', text: search, class: 'collection-item' })
+      : recentSearchLI = $('<a>')
+        .prop({ href: obj.facebook_tour_dates_url,
+          text: search, class: 'collection-item' });
       $('#recent-searches').prepend(recentSearchLI);
     }
   };
-  loadRecentSearches()
+  loadRecentSearches();
 
   const storeRecentSearches = function(input) {
     if (localStorage !== undefined) {
       const searches = JSON.parse(localStorage.getItem('searches')) || [];
+
       if (searches.includes(input)) {
         input = null;
       }
-      let i = searches.length;
+      const i = searches.length;
+
       if (input !== '' && input !== null) {
         searches[i] = input;
         localStorage.setItem('searches', JSON.stringify(searches));
@@ -48,8 +50,7 @@
     else {
       return;
     }
-
-  }
+  };
 
   const renderEvents = function(state) {
     const shows = state;
@@ -113,11 +114,9 @@
 
     for (const search of recentSearches) {
       const recentSearchLI = $('<li>').text(search);
-        console.log(JSON.parse(localStorage.getItem(search)))
 
       $('#recent-searches').prepend(recentSearchLI);
     }
-
 
     localStorage.setItem(state.name.toLowerCase(), JSON.stringify(state));
     const rowDiv = $('<div>').prop('class', 'row');
@@ -237,13 +236,13 @@
 
     if (code === 13) {
       if ($('input:checkbox').is(':checked')) {
-        storeRecentSearches(input)
+        storeRecentSearches(input);
         advancedSearch(input);
       }
       else {
         $('.results').empty();
         $('.artistName, .profileDiv, .detailsDiv').empty();
-        storeRecentSearches(input)
+        storeRecentSearches(input);
         getArtists(input);
       }
     }
@@ -251,8 +250,8 @@
 
   $('.search-button').click(() => {
     const input = $('#search-input').val();
-    storeRecentSearches(input)
 
+    storeRecentSearches(input);
 
     if (input.trim() === '' || input.trim() === 'Enter Your Search Here') {
       Materialize.toast('Please Enter an Artist or Group', 4000);

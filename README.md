@@ -11,7 +11,7 @@ Tour List
 Solves the problem of not being able to find easily accessible and clearly formatted tour information, especially on mobile devices.
 
 ### Who has this problem?
-Primary user 'Ricky' hates being bombarded with ads or being forced to download native applications, but needs a site to get the latest tour information for his favorite music while touring in his RV.
+Primary user 'Ricky' hates being bombarded with ads or being forced to download native applications, but he needs a site to get the latest tour information for his favorite music while touring in his RV.
 
 ### How does your project solve this problem?
 Tour List is a web application that provides an easy to read format of music tour information and is accessible on most any screen size. It' designed to be easy on resources, so it can always be loaded even with a slow connection.
@@ -26,4 +26,5 @@ HTML, CSS, JavaScript, jQuery, Materialize, AJAX, localStorage
 Limit focus to central product and achieving primary user stories, not worry about adding extra features.
 
 ### What was the biggest challenge you had to overcome?
-The predictive search feature didn't make the final application because it had built in CSS that was overriding my own CSS rules, it ended up being more trouble than it was worth. CSS in general was what I struggled with most throughout the process, it consumed the bulk of my time.
+
+The predictive search feature I spent significant time implementing didn't make the final application because it had built in applied CSS that was overriding my own CSS rules, it ended up being more trouble than it was worth. CSS in general was what I struggled with most throughout the process, it consumed the bulk of my time.
