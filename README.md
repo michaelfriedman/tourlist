@@ -1,14 +1,9 @@
+# Tourlist
+
 [![Stories in Ready](https://badge.waffle.io/michaelfriedman/web-development-immersive-quarter1-project.png?label=ready&title=Ready)](https://waffle.io/michaelfriedman/web-development-immersive-quarter1-project)
 
 **Application Demonstration Link Below**
 [https://vimeo.com/195355251]
-
-
-# Galvanize Web Development Immersive
-## Quarter 1 Project
-
-### What's the name of your project?
-Tour List
 
 ### What problem does it solve?
 Solves the problem of not being able to find easily accessible and clearly formatted tour information, especially on mobile devices.
